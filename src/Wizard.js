@@ -19,7 +19,10 @@ const init = () => ({
 export const WizardContext = React.createContext(init());
 
 class Wizard extends Component {
-  state = { ...init(), treeKeys: [] };
+  constructor(props) {
+    super(props);
+    this.state = { ...init(), treeKeys: [] };
+  }
 
   componentDidMount() {
     const { tree, first } = this.props;
