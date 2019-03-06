@@ -2,12 +2,12 @@
 
 ## Quick start
 
-`yarn add react-decision-tree`
+`yarn add react-decision-tree-flow`
 
 code
 
 ```
-import { Wizard, Step, Controls } from "react-decision-tree;
+import { Wizard, Step, Controls } from "react-decision-tree-flow";
 
 const tree = {
   step1: ["step2"],
@@ -88,7 +88,7 @@ That's not a line, that's a tree. As such, I've created a declarative decision t
 
 ## How?
 
-There's three components to `react-decision-tree` The **Wizard**, a **Step**, and **Controls**.
+There's three components to `react-decision-tree-flow` The **Wizard**, a **Step**, and **Controls**.
 
 ## Wizard
 

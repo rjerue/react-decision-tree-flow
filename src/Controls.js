@@ -22,9 +22,7 @@ class Controls extends Component {
                     ...agg,
                     ...Object.entries(to).reduce((agg2, [key, value]) => {
                       if (typeof value !== "string") {
-                        throw new Error(
-                          "react-decision-tree error! nested objects must have keys of type string!"
-                        );
+                        error("Nested objects must have keys of type string!");
                       }
                       isKeyInList(treeKeys, value);
                       return { ...agg2, [key]: () => setStep(value) };

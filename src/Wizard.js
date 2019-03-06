@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 export const error = (msg = "") => {
-  throw new Error(`react-decision-tree error! ${msg}`.trim());
+  throw new Error(`react-decision-tree-flow error! ${msg}`.trim());
 };
 
 export const isKeyInList = (list, key, msg) => {

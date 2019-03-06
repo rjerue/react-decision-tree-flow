@@ -1,8 +1,24 @@
 {
-  "name": "react-decision-tree",
-  "version": "0.9.0",
+  "name": "react-decision-tree-flow",
+  "version": "0.9.3",
+  "author": {
+    "name": "Ryan Jerue",
+    "email": "ryan@jerue.org",
+    "url": "http://jerue.org"
+  },
+  "description": "A declarative decision tree for React and React-Native",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "wizard",
+    "decision",
+    "tree",
+    "react-native",
+    "react-native-web"
+  ],
   "private": false,
   "entry": "index.js",
+  "repository": "https://github.com/rjerue/react-decision-tree",
   "peerDependencies": {
     "react": "^16.7.0"
   },
