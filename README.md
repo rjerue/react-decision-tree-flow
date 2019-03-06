@@ -4,6 +4,8 @@
 
 `yarn add react-decision-tree-flow`
 
+[Demo](https://github.com/rjerue/react-decision-tree)
+
 code
 
 ```

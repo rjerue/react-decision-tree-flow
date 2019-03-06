@@ -18,7 +18,8 @@
   ],
   "private": false,
   "entry": "index.js",
-  "repository": "https://github.com/rjerue/react-decision-tree",
+  "repository": "https://github.com/rjerue/react-decision-tree-flow",
+  "homepage": "https://rjerue.github.io/react-decision-tree-flow",
   "peerDependencies": {
     "react": "^16.7.0"
   },
@@ -28,6 +29,7 @@
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
     "@storybook/react": "^5.0.0",
+    "@storybook/storybook-deployer": "^2.8.1",
     "babel-loader": "^8.0.5",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
@@ -46,9 +48,10 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "prepublishOnly": "npm run release",
-    "release": "npm run build:dev && npm run build:prod",
+    "release": "npm run build:dev && npm run build:prod && npm run deploy-storybook",
     "build:prod": "NODE_ENV=production rollup -c",
-    "build:dev": "NODE_ENV=development rollup -c"
+    "build:dev": "NODE_ENV=development rollup -c",
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "eslintConfig": {
     "extends": "react-app"
