@@ -20,10 +20,8 @@ class App extends Component {
       <div>
         <Wizard first="step1" tree={tree}>
           {Object.keys(tree).map(key => (
-            <Step
-              name={key}
-              key={key}
-              render={({ step }) => (
+            <Step name={key} key={key}>
+              {({ step }) => (
                 <div>
                   I am {step}
                   <br />
@@ -38,7 +36,7 @@ class App extends Component {
                   />
                 </div>
               )}
-            />
+            </Step>
           ))}
         </Wizard>
       </div>

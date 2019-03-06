@@ -3,7 +3,7 @@ import { WizardContext, isKeyInList } from "./Wizard";
 
 class Step extends Component {
   render() {
-    const { name, render: renderProp } = this.props;
+    const { name, children } = this.props;
     return (
       <WizardContext.Consumer>
         {({ step, context, setContext, tree, treeKeys }) => {
@@ -11,11 +11,9 @@ class Step extends Component {
             return null;
           }
           isKeyInList(treeKeys, name);
-          return step === name ? (
-            <React.Fragment>
-              {renderProp({ setContext, context, tree, step })}
-            </React.Fragment>
-          ) : null;
+          return step === name
+            ? children({ setContext, context, tree, step })
+            : null;
         }}
       </WizardContext.Consumer>
     );

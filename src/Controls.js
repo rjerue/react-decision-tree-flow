@@ -3,10 +3,11 @@ import { WizardContext, error, isKeyInList } from "./Wizard";
 
 class Controls extends Component {
   render() {
+    const { children = () => null } = this.props;
     return (
       <WizardContext.Consumer>
         {({ setStep, tree = {}, step = "", setContext, treeKeys }) =>
-          this.props.render(
+          children(
             (tree[step] || []).reduce(
               (agg, to) => {
                 if (!to) {

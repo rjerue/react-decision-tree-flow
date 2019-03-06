@@ -10,59 +10,55 @@ const tree = {
 
 const App = () => (
   <Wizard tree={tree} first="step1">
-    <Step
-      name="step1"
-      render={({ step }) => (
+    <Step name="step1">
+      {({ step }) => (
         <div>
           I am {step}
           <br />
-          <Controls
-            render={({ step2 }) => <div onClick={step2}>Go to Step 2</div>}
-          />
+          <Controls>
+            {({ step2 }) => <div onClick={step2}>Go to Step 2</div>}
+          </Controls>
         </div>
       )}
-    />
-    <Step
-      name="step2"
-      render={({ step }) => (
+    </Step>
+    <Step name="step2">
+      {({ step }) => (
         <div>
           I am step {step}
           <br />
-          <Controls
-            render={({ step3, error }) => (
+          <Controls>
+            {({ step3, error }) => (
               <div>
                 <div onClick={error}>Go to error</div>
                 <div onClick={step3}>Go to Step 3</div>
               </div>
             )}
-          />
+          </Controls>
         </div>
       )}
-    />
-    <Step
-      name="step3"
-      render={({ step }) => (
+    </Step>
+    <Step name="step3">
+      {({ step }) => (
         <div>
           I am step {step}
           <br />
-          <Controls
-            render={({ step1 }) => <div onClick={step1}>Go to Step 1</div>}
-          />
+          <Controls>
+            {({ step1 }) => <div onClick={step1}>Go to Step 1</div>}
+          </Controls>
         </div>
       )}
-    />
-    <Step
-      name="error"
-      render={({ step }) => (
+    </Step>
+    <Step name="error">
+      {({ step }) => (
         <div>
           I am step {step}
           <br />
-          <Controls
-            render={({ step2 }) => <div onClick={step2}>Go to Step 2</div>}
-          />
+          <Controls>
+            {({ step2 }) => <div onClick={step2}>Go to Step 2</div>}
+          </Controls>
         </div>
       )}
-    />
+    </Step>
   </Wizard>
 );
 
