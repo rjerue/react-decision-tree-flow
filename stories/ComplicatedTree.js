@@ -25,15 +25,15 @@ class App extends Component {
                 <div>
                   I am {step}
                   <br />
-                  <Controls
-                    render={({ tree, step, setContext, setStep, ...places }) =>
+                  <Controls>
+                    {({ tree, step, setContext, setStep, ...places }) =>
                       Object.entries(places).map(([key, value]) => (
                         <div key={key} onClick={value}>
                           GO TO {key}
                         </div>
                       ))
                     }
-                  />
+                  </Controls>
                 </div>
               )}
             </Step>
