@@ -4,7 +4,7 @@
 
 `yarn add react-decision-tree-flow`
 
-[Demo](https://github.com/rjerue/react-decision-tree)
+[Demo](https://rjerue.github.io/react-decision-tree-flow)
 
 code
 
@@ -90,7 +90,7 @@ There's three components to `react-decision-tree-flow` The **Wizard**, a **Step*
 
 ## Wizard
 
-The Wizard needs to wrap everything because this is where the context lives. It needs two props: the **tree** and the **first** step.
+The Wizard needs to wrap everything because this is where the context lives. It needs two props: the **tree** and the **first** step. There is also an option **context** prop to set a default context.
 
 #### Tree
 
