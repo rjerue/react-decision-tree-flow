@@ -12,8 +12,7 @@ export const isKeyInList = (list, key, msg) => {
 
 const init = () => ({
   tree: {},
-  step: null,
-  context: {}
+  step: null
 });
 
 export const WizardContext = React.createContext(init());
@@ -21,7 +20,8 @@ export const WizardContext = React.createContext(init());
 class Wizard extends Component {
   constructor(props) {
     super(props);
-    this.state = { ...init(), treeKeys: [] };
+    const { context = {} } = props;
+    this.state = { ...init(), treeKeys: [], context };
   }
 
   componentDidMount() {
