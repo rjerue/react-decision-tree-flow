@@ -21,21 +21,19 @@ class App extends Component {
         <Wizard first="step1" tree={tree}>
           {Object.keys(tree).map(key => (
             <Step name={key} key={key}>
-              {({ step }) => (
-                <div>
-                  I am {step}
-                  <br />
-                  <Controls>
-                    {({ tree, step, setContext, setStep, ...places }) =>
-                      Object.entries(places).map(([key, value]) => (
-                        <div key={key} onClick={value}>
-                          GO TO {key}
-                        </div>
-                      ))
-                    }
-                  </Controls>
-                </div>
-              )}
+              <Controls>
+                {({ tree, step, setContext, setStep, ...places }) => (
+                  <div>
+                    I am {step}
+                    <br />
+                    {Object.entries(places).map(([key, value]) => (
+                      <div key={key} onClick={value}>
+                        GO TO {key}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </Controls>
             </Step>
           ))}
         </Wizard>

@@ -1,14 +1,5 @@
 import React, { Component } from "react";
-
-export const error = (msg = "") => {
-  throw new Error(`react-decision-tree-flow error! ${msg}`.trim());
-};
-
-export const isKeyInList = (list, key, msg) => {
-  if (!list.some(value => key === value)) {
-    error(msg || `Step ( ${key} ) Missing from Tree List!`);
-  }
-};
+import { isKeyInList } from './utils'
 
 const init = () => ({
   tree: {},
@@ -20,8 +11,7 @@ export const WizardContext = React.createContext(init());
 class Wizard extends Component {
   constructor(props) {
     super(props);
-    const { context = {} } = props;
-    this.state = { ...init(), treeKeys: [], context };
+    this.state = { ...init(), treeKeys: [] };
   }
 
   componentDidMount() {
@@ -35,10 +25,6 @@ class Wizard extends Component {
     this.setState({ step });
   };
 
-  setContext = context => {
-    this.setState({ context });
-  };
-
   render() {
     const { children } = this.props;
     return (
@@ -46,7 +32,6 @@ class Wizard extends Component {
         value={{
           ...this.state,
           setStep: this.setStep,
-          setContext: this.setContext
         }}
       >
         {children}

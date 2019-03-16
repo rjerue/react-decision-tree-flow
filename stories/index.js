@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown";
 import readme from "../README.md";
 import BasicTree from "./BasicTree";
 import Complcated from "./ComplicatedTree";
+import HooksTree from './HooksTree'
 
 storiesOf("Readme", module).add("Readme.md", () => (
   <ReactMarkdown source={readme} />
@@ -11,4 +12,5 @@ storiesOf("Readme", module).add("Readme.md", () => (
 
 storiesOf("Examples", module)
   .add("Basic Example", () => <BasicTree />)
-  .add("Complicated Tree!", () => <Complcated />);
+  .add("Complicated Tree!", () => <Complcated />)
+  .add("Hooks" , () => <HooksTree />);

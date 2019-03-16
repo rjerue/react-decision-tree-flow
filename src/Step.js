@@ -1,18 +1,18 @@
 import React, { Component } from "react";
-import { WizardContext, isKeyInList } from "./Wizard";
-
+import { WizardContext } from "./Wizard";
+import { isKeyInList } from './utils'
 class Step extends Component {
   render() {
     const { name, children } = this.props;
     return (
       <WizardContext.Consumer>
-        {({ step, context, setContext, tree, treeKeys }) => {
+        {({ step, treeKeys }) => {
           if (!step) {
             return null;
           }
           isKeyInList(treeKeys, name);
           return step === name
-            ? children({ setContext, context, tree, step })
+            ? children
             : null;
         }}
       </WizardContext.Consumer>
