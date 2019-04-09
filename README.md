@@ -82,7 +82,7 @@ There's three components to `react-decision-tree-flow` The **Wizard**, a **Step*
 
 ## Wizard
 
-The Wizard needs to wrap everything because this is where the context lives. It needs two props: the **tree** and the **first** step.
+The Wizard needs to wrap everything because this is where the context lives. It needs two props: the **tree** and the **first** step. The wizard has an optional third prop called `middleware` for middleware that runs after each step. You pay pass in a function or an array of functions. There is a `noFirst` prop to skip running middleware on the first step. The `middleware` function takes in the params `step, setStep, tree`. `Step` is the current step, `setStep` is a function to change the step (pass in new step), and `tree` is the tree passed into the wizard.
 
 #### Tree
 

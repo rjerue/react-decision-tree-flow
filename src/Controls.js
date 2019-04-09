@@ -7,8 +7,8 @@ class Controls extends Component {
     const { children = () => null } = this.props;
     return (
       <WizardContext.Consumer>
-        {({ setStep, tree = {}, step = "", treeKeys }) =>
-          children(getControls(tree, step, treeKeys, setStep))
+        {({ setStep, tree = {}, step = "", treeKeys, middleware }) =>
+          children(getControls(tree, step, treeKeys, setStep, middleware))
         }
       </WizardContext.Consumer>
     );
