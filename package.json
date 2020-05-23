@@ -1,5 +1,5 @@
 {
-  "version": "2.0.2",
+  "version": "2.0.3",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -10,6 +10,11 @@
   "engines": {
     "node": ">=10"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rjerue/react-decision-tree-flow.git"
+  },
+  "homepage": "https://rjerue.github.io/react-decision-tree-flow",
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
