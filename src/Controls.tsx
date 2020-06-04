@@ -5,6 +5,7 @@ export interface ControlHook<T extends Tree, D extends any = any> {
   step: keyof T;
   tree: T;
   destinations: Record<keyof T, (data?: D) => void>;
+  back: (currentData?: D) => void;
   data?: D;
 }
 
@@ -17,10 +18,19 @@ export function useControls<T extends Tree, D extends any = any>(): ControlHook<
   T,
   D
 > {
-  const { getControls, step, tree, data } = React.useContext(
+  const { getControls, step, tree, data, back } = React.useContext(
     WizardContext as React.Context<WizardContextProps<T, D>>
   );
-  return { step, tree, destinations: getControls(), data: data || undefined };
+  const backFunction = (newData?: D) => {
+    back(newData);
+  };
+  return {
+    step,
+    tree,
+    destinations: getControls(),
+    data: data || undefined,
+    back: backFunction,
+  };
 }
 
 export interface ControlProps<T extends Tree, D extends any = any> {

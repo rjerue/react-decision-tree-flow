@@ -4,6 +4,7 @@ export interface ControlHook<T extends Tree, D extends any = any> {
     step: keyof T;
     tree: T;
     destinations: Record<keyof T, (data?: D) => void>;
+    back: (currentData?: D) => void;
     data?: D;
 }
 /**
