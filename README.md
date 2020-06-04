@@ -9,7 +9,7 @@ export const BasicTree = () => {
   const tree = {
     step1: ['step2'],
     step2: ['step3', 'error'],
-    step3: ['step1'],
+    step3: [],
     error: ['step2'],
   };
 
@@ -41,24 +41,14 @@ export const BasicTree = () => {
         </div>
       </Step>
       <Step name="step3">
-        <div>
-          I am step 3
-          <br />
-          <Controls>
-            {({ destinations: { step1 } }) => (
-              <button onClick={step1}>Go to Step 1</button>
-            )}
-          </Controls>
-        </div>
+        <div>I am step 3. No steps after me!</div>
       </Step>
       <Step name="error">
         <div>
-          I am step 4
+          I am error
           <br />
           <Controls>
-            {({ destinations: { step2 } }) => (
-              <button onClick={step2}>Go to Step 2</button>
-            )}
+            {({ back }) => <button onClick={back}>Go back to Step 2</button>}
           </Controls>
         </div>
       </Step>
@@ -147,7 +137,7 @@ Controls are what actually drive the Wizard. They may be surfaced via a render p
 <Wizard>
   ...
   <Controls>
-    {({ step, tree, destinations: { step2 }, data }) => (
+    {({ step, tree, destinations: { step2 }, data, back }) => (
       <>
         {data && <p>{data}</p>}
         <button onClick={step2}>Go to Step 2</button>
@@ -158,7 +148,7 @@ Controls are what actually drive the Wizard. They may be surfaced via a render p
 </Wizard>;
 
 // Hook
-const { step, tree, destinations, data } = useControls();
+const { step, tree, destinations, data, back } = useControls();
 ```
 
 When using the hook in typescript, you may pass a `typeof tree` in as a generic for `useControl()` to allow for hinting under destinations as such.
@@ -179,6 +169,8 @@ The hook and render props deliver 3 things in the return, the current `step` tha
 The only rule surrounding the `Controls` component and it's hook is that it has the `Wizard` as a descendant. It may go under a `Step` or just the `Wizard` in general.
 
 Data may also be passed from step to step using the functions in `destination` that data is surfaced here using the `data` prop. If data is falsey, it will be undefined.
+
+The back function allows for you to step back in the tree. It will bring the user back to the previously visited step and `data` will return to what it was previously as well. One may pass data into `back` as a parameter to replace the data that was in there previously with something new if desired.
 
 ### `destinations` aka Moving the Wizard.
 
