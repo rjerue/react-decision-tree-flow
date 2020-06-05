@@ -27,18 +27,46 @@ function _extends() {
 var WizardContext = /*#__PURE__*/React.createContext({
   tree: {},
   step: '',
-  setStep: function setStep() {},
   getControls: function getControls() {
     return {};
   },
   data: {},
-  setData: function setData() {}
+  back: function back() {}
 });
 
+function reducer(state, action) {
+  switch (action.type) {
+    case 'SET_STEP':
+      return _extends({}, state, {
+        history: [state.active].concat(state.history),
+        active: {
+          step: action.step,
+          data: action.data
+        }
+      });
+
+    case 'STEP_BACK':
+      var _state$history = state.history,
+          previous = _state$history[0],
+          history = _state$history.slice(1);
+
+      return _extends({}, state, {
+        active: {
+          step: previous.step,
+          data: action.data
+        },
+        history: history
+      });
+
+    default:
+      return state;
+  }
+}
 /**
  * Declarative Wizard component for React.
  * @param props Takes in a tree, the first step of the wizard, and children.
  */
+
 
 function Wizard(_ref) {
   var children = _ref.children,
@@ -46,7 +74,19 @@ function Wizard(_ref) {
       first = _ref.first,
       _ref$initialData = _ref.initialData,
       initialData = _ref$initialData === void 0 ? null : _ref$initialData;
-  // Check tree for bad values
+
+  var _React$useReducer = React.useReducer(reducer, {
+    active: {
+      step: first,
+      data: initialData || undefined
+    },
+    history: []
+  }),
+      _React$useReducer$0$a = _React$useReducer[0].active,
+      step = _React$useReducer$0$a.step,
+      data = _React$useReducer$0$a.data,
+      dispatch = _React$useReducer[1];
+
   React.useEffect(function () {
     var allSteps = Object.keys(tree);
 
@@ -67,38 +107,36 @@ function Wizard(_ref) {
     });
   }, [tree]);
 
-  var _React$useState = React.useState(first),
-      step = _React$useState[0],
-      setStep = _React$useState[1];
-
-  var _React$useState2 = React.useState(initialData),
-      data = _React$useState2[0],
-      setData = _React$useState2[1];
-
   var getControls = function getControls() {
     var possibleSteps = tree[step];
     return possibleSteps.reduce(function (accum, step) {
       var _next;
 
       var next = (_next = {}, _next[step] = function (data) {
-        setStep(step);
-
-        if (data) {
-          setData(data);
-        }
+        dispatch({
+          type: 'SET_STEP',
+          step: step,
+          data: data
+        });
       }, _next);
       return _extends({}, accum, {}, next);
     }, {});
+  };
+
+  var back = function back(backData) {
+    dispatch({
+      type: 'STEP_BACK',
+      data: backData || data
+    });
   };
 
   return React.createElement(WizardContext.Provider, {
     value: {
       tree: tree,
       step: step,
-      setStep: setStep,
+      back: back,
       getControls: getControls,
-      data: data,
-      setData: setData
+      data: data
     }
   }, children);
 }
@@ -114,13 +152,19 @@ function useControls() {
       getControls = _React$useContext.getControls,
       step = _React$useContext.step,
       tree = _React$useContext.tree,
-      data = _React$useContext.data;
+      data = _React$useContext.data,
+      back = _React$useContext.back;
+
+  var backFunction = function backFunction(newData) {
+    back(newData);
+  };
 
   return {
     step: step,
     tree: tree,
     destinations: getControls(),
-    data: data || undefined
+    data: data || undefined,
+    back: backFunction
   };
 }
 /**

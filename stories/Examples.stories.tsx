@@ -157,7 +157,7 @@ export const PassedDataTree = () => {
                     step2((data as number) + 1);
                   }}
                 >
-                  Go to Step 2
+                  Go to Step 1
                 </button>
               </>
             )}
@@ -177,7 +177,7 @@ export const PassedDataTree = () => {
                     step3((data as number) + 1);
                   }}
                 >
-                  Go to Step 2
+                  Go to Step 3
                 </button>
               </>
             )}
@@ -197,7 +197,109 @@ export const PassedDataTree = () => {
                     step1((data as number) + 1);
                   }}
                 >
+                  Go to Step 1
+                </button>
+              </>
+            )}
+          </Controls>
+        </div>
+      </Step>
+    </Wizard>
+  );
+};
+
+export const PassedDataTreeWithBack = () => {
+  const tree = {
+    step1: ['step2'],
+    step2: ['step3', 'stepX'],
+    stepX: [],
+    step3: [],
+  } as const;
+
+  return (
+    <Wizard tree={tree} first="step1" initialData={1}>
+      <div>The last lazer master</div>
+      <Step name="step1">
+        <div>
+          I am step 1
+          <br />
+          <Controls>
+            {({ destinations: { step2 }, data }) => (
+              <>
+                <div>You have been to {data} steps.</div>
+                <button
+                  onClick={() => {
+                    step2((data as number) + 1);
+                  }}
+                >
                   Go to Step 2
+                </button>
+              </>
+            )}
+          </Controls>
+        </div>
+      </Step>
+      <Step name="step2">
+        <div>
+          I am step 2
+          <br />
+          <Controls>
+            {({ destinations: { step3, stepX }, data }) => (
+              <>
+                <div>You have been to {data} steps.</div>
+                <button
+                  onClick={() => {
+                    step3((data as number) + 1);
+                  }}
+                >
+                  Go to Step 3
+                </button>
+                <button
+                  onClick={() => {
+                    stepX((data as number) + 1);
+                  }}
+                >
+                  Go to Step X
+                </button>
+              </>
+            )}
+          </Controls>
+        </div>
+      </Step>
+      <Step name="stepX">
+        <div>
+          I am step X
+          <br />
+          <Controls>
+            {({ data, back }) => (
+              <>
+                <div>You have been to {data} steps.</div>
+                <button
+                  onClick={() => {
+                    back(999);
+                  }}
+                >
+                  Go back
+                </button>
+              </>
+            )}
+          </Controls>
+        </div>
+      </Step>
+      <Step name="step3">
+        <div>
+          I am step 3
+          <br />
+          <Controls>
+            {({ data, back }) => (
+              <>
+                <div>You have been to {data} steps.</div>
+                <button
+                  onClick={() => {
+                    back();
+                  }}
+                >
+                  Go to Step 1
                 </button>
               </>
             )}
